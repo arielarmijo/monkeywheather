@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1></h1>
+    <img>
+    <script>
+        var url = new URL(window.location);
+        var userName = url.searchParams.get("user");
+        document.querySelector("img").src = "http://localhost:8080/userapi/user-image/" + userName;
+        document.querySelector("h1").textContent = "Bienvenido usuario " + userName;
+    </script>
+</body>
+
+</html>

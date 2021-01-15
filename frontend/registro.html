@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
+        <script type="module" src="js/registro.js"></script>
+    <title>Registro</title>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="card col-md-10 col-lg-7">
+            <div class="card-body text-center">
+                <h1>Registro</h1>
+                <div class="form-row p-2">
+                    <label class="col-form-label col-4" for="userName">Usuario:</label>
+                    <input id="userName" type="text" name="userName" required/>
+                </div>
+                <div class="form-row p-2">
+                    <label class="col-form-label col-4" for="password">Contraseña:</label>
+                    <input id="password" type="password" name="password" required/>
+                </div>
+                <div class="form-row p-2">
+                    <input id="image" class="form-control" type="file" name="image" accept="image/*" />
+                </div>
+                <div class="row p-2">
+                    <label id="preview"></label>
+                </div>
+                <button id="btnRegistrar" class="btn btn-primary">Registrar</button>
+                <button id="btnVerUsuarios" class="btn btn-info">Ver Usuarios</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
