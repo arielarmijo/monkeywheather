@@ -5,12 +5,12 @@ pipeline {
 			steps {
 				sh 'ls -l'
 				sh 'mvn --version'
-				sh 'mvn -f monkeycode/server/userapi/pom.xml clean install'
+				sh 'mvn -f server/userapi/pom.xml clean install'
 			}
 		}
 		stage('deploy') {
 			steps {
-				sh 'cp monkeyweather/server/userapi/target/*.war /var/lib/tomcat9/webapps/'
+				sh 'cp server/userapi/target/*.war /var/lib/tomcat9/webapps/'
 			}
 		}
 	}
