@@ -1,4 +1,4 @@
-package monkeycode.userapi.exception;
+package monkeycode.monkeyweather.userapi.exception;
 
 public class UserNotFoundException extends RuntimeException {
 

@@ -1,8 +1,8 @@
-package monkeycode.userapi.service;
+package monkeycode.monkeyweather.userapi.service;
 
 import java.util.List;
 
-import monkeycode.userapi.domain.User;
+import monkeycode.monkeyweather.userapi.domain.User;
 
 public interface UserService {
 	

@@ -1,4 +1,4 @@
-package monkeycode.userapi.controller;
+package monkeycode.monkeyweather.userapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import monkeycode.userapi.exception.UserNotFoundException;
+import monkeycode.monkeyweather.userapi.exception.UserNotFoundException;
 
 @ControllerAdvice
 public class UsurNotFoundAdvice {

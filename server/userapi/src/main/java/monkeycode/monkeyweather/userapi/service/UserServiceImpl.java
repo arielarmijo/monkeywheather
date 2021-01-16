@@ -1,12 +1,12 @@
-package monkeycode.userapi.service;
+package monkeycode.monkeyweather.userapi.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import monkeycode.userapi.domain.User;
-import monkeycode.userapi.repository.UserRepository;
+import monkeycode.monkeyweather.userapi.domain.User;
+import monkeycode.monkeyweather.userapi.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User buscarUsuarioPorNombre(String username) {
-		//return repo.findById(username).orElse(null);
 		return repo.findByUserName(username);
 	}
 

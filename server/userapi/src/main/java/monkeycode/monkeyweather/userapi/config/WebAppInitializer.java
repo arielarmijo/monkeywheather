@@ -1,4 +1,4 @@
-package monkeycode.userapi.config;
+package monkeycode.monkeyweather.userapi.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
