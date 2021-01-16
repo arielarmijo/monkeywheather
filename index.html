@@ -6,19 +6,19 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body onload="getWeather();">
+<body >
   
   <div>
     <div class="container mt-5">
         <form class="row g-3">
             <div class="col-auto">
-                <label for="inputPassword2" class="form-control-plaintext">Ciudad</label>
+                <label for="cityInput" class="form-control-plaintext">Ciudad</label>
             </div>
             <div class="col-auto">
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Ciudad">
+                <input type="text" class="form-control" id="cityInput" placeholder="Ciudad">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">Obtener tiempo</button>
+                <button class="btn btn-primary mb-3" type="button" onclick="getWeatherButton()" >Obtener tiempo</button>
             </div>
         </form>
         <div class="card text-center">
