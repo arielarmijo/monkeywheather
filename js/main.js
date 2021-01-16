@@ -1,12 +1,17 @@
 const apiKey = '72216e8ac7dc0f927f7aa3d9b2af7c3f';
+const date = moment()
 
 fahrenheitInCelsius = k => Math.floor(k-273.15);
 
 async function getWeather(city){
   const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
   const response = await api_call.json();
+  debugger
   const api_call_forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
   const responseForecast = await api_call_forecast.json();
+
+
+  document.getElementById('time').innerHTML= moment.unix(response.dt).format('DD-MM-YYYY');
 
   document.getElementById('weatherImage').src=`http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
   document.getElementById('description').innerHTML=response.weather[0].description;
@@ -27,6 +32,9 @@ async function getWeather(city){
   };
   console.log(trace)
   Plotly.newPlot('myDiv', [trace]);
+
+
+
 }
 
 
