@@ -18,12 +18,12 @@ async function getWeather(city){
     x: responseForecast.list.filter((record,index)=>{
       if (index%8===0 )
         return record
-    }).map(record=>record.dt_txt),        
+    }).map(record=>record.dt_txt.substring(0,10)),        
     y: responseForecast.list.filter((record,index)=>{
       if (index%8===0 )
         return record
     }).map(record=>fahrenheitInCelsius(record.main.temp)),      
-    mode: 'line'    
+    type: 'bar'    
   };
   console.log(trace)
   Plotly.newPlot('myDiv', [trace]);
