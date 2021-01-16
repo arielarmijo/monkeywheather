@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let passwordError = document.getElementById("passwordError");
 
     document.getElementById('image').addEventListener('change', updateImagePreview);
-    document.getElementById('btnVerUsuarios').addEventListener('click', getUserNames);
     document.getElementById('btnRegistrar').addEventListener('click', registrarUsuario);
 
     document.getElementById('userName').addEventListener('focus', function() {clearError(userNameError)});
