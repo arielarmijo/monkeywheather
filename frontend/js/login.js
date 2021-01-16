@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data);
             if (password == data.password) {
                 var queryString = "?user=" + usuario;
                 window.location.href = "./user.html" + queryString;
