@@ -27,6 +27,11 @@
 				<td>/user/{username}</td>
 				<td>GET</td>
 			</tr>
+			<tr>
+				<td>Obtener imagen de usuario</td>
+				<td>/user/{username}/image</td>
+				<td>GET</td>
+			</tr>
 			 <tr>
 				<td>Crear usuario</td>
 				<td>/user/</td>
