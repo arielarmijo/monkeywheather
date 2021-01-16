@@ -8,6 +8,7 @@ pipeline {
 		}
 		stage('deploy') {
 			steps {
+				sh 'rm -r /var/lib/tomcat9/webapps/monkeyweather'
 				sh 'cp -r frontend /var/lib/tomcat9/webapps/monkeyweather/'
 			}
 		}
