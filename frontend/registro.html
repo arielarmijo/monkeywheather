@@ -6,30 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
+    <link rel="stylesheet"href="css/registro.css"/>
+    <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
         <script type="module" src="js/registro.js"></script>
     <title>Registro</title>
 
 </head>
 
 <body>
+    <a href="login.html">login</a>
+    <a href="registro.html">sign in</a>
     <div class="container">
 
         <div class="card col-md-10 col-lg-7">
             <div class="card-body text-center">
                 <h1>Registro</h1>
-                <div class="form-row p-2">
-                    <label class="col-form-label col-4" for="userName">Usuario:</label>
-                    <input id="userName" type="text" name="userName" required/>
+                <div class="row">
+                    <label for="userName">Usuario:</label>
+                    <input  class="form-control" id="userName" type="text" name="userName"/>
+                    <div id="userNameError" class="alert alert-danger d-none"></div>
                 </div>
-                <div class="form-row p-2">
-                    <label class="col-form-label col-4" for="password">Contraseña:</label>
-                    <input id="password" type="password" name="password" required/>
+                <div class="row">
+                    <label for="pwd1">Contraseña:</label>
+                    <input class="form-control" id="pwd1" type="password" name="pwd1" placeholder="Ingrese contraseña"/>
+                    <input class="form-control" id="pwd2" type="password" name="pwd2" placeholder="Reingrese contraseña"/>
+                    <div id="passwordError" class="alert alert-danger d-none"></div>
                 </div>
-                <div class="form-row p-2">
-                    <input id="image" class="form-control" type="file" name="image" accept="image/*" />
+                <div class="row">
+                    <label for="location">Ubicación:</label>
+                    <input class="form-control" id="location" type="text" name="location"/>
                 </div>
-                <div class="row p-2">
+                <div class="row">
+                    <label>Subir imágen</label>
+                    <input id="image" class="form-control" type="file" name="image" accept="image/jpg, image/jpeg, image/png" />
+                </div>
+                <div class="row">
                     <label id="preview"></label>
                 </div>
                 <button id="btnRegistrar" class="btn btn-primary">Registrar</button>

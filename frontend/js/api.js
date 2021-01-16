@@ -1,1 +1,1 @@
-export const url = "http://localhost:8080/userapi/";
+export const apiUrl = "http://localhost:8080/monkeyweather/";

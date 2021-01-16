@@ -1,10 +1,27 @@
-import { url } from "./api.js";
+import { apiUrl } from "./api.js";
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    let userNameError = document.getElementById("userNameError");
+    let passwordError = document.getElementById("passwordError");
+
     document.getElementById('image').addEventListener('change', updateImagePreview);
-    document.getElementById('btnVerUsuarios').addEventListener('click', logUsers);
+    document.getElementById('btnVerUsuarios').addEventListener('click', getUserNames);
     document.getElementById('btnRegistrar').addEventListener('click', registrarUsuario);
+
+    document.getElementById('userName').addEventListener('focus', function() {clearError(userNameError)});
+    document.getElementById('pwd1').addEventListener('focus', function() {clearError(passwordError)});
+    document.getElementById('pwd2').addEventListener('focus', function() {clearError(passwordError)});
+
+    function clearError(input) {
+        input.classList.add("d-none");
+        input.innerText="";
+    }
+
+    function showError(input, message) {
+        input.classList.remove("d-none");
+        input.innerText=message;
+    }
 
     function updateImagePreview() {
         let preview = document.getElementById('preview');
@@ -20,37 +37,62 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function registrarUsuario() {
-        let usuario = document.getElementById("userName").value;
-        let password = document.getElementById("password").value;
+
+        let userName = document.getElementById("userName").value;
+
+        if (!userName) {
+            showError(userNameError, "Ingresa nombre de usuario.");
+            return;
+        }
+
+        let pwd1 = document.getElementById("pwd1").value;
+        let pwd2 = document.getElementById("pwd2").value;
+        
+        if (!pwd1 && !pwd2) {
+            showError(passwordError, "Ingresa contraseña.");
+            return;
+        }
+
+        if (pwd1 !== pwd2) {
+            showError(passwordError, "Contraseñas no coinciden.");
+            return;
+        }
+
         let imagen = document.getElementById('image').files[0];
-        console.log(usuario, password, imagen);
+        let location = document.getElementById("location").value;
         var data = new FormData();
-        data.append("userName", usuario);
-        data.append("password", password);
+        data.append("userName", userName);
+        data.append("password", pwd1);
+        data.append("location", location);
         data.append("image", imagen);
-        fetch(url + "user", {
+
+        fetch(apiUrl + "user", {
             method: "POST",
             body: data
             })
-            .then(response => console.log(response))
-            .catch(response => console.log(response));
-    };
-
-    function logUsers() {
-        fetch(url + "users")
             .then(response => {
                 if (response.status == 200) {
-                    return response.text();
+                    var queryString = "?user=" + userName;
+                    window.location.href = "./user.html" + queryString;
                 } else {
-                    throw "Respuesta incorrecta del servidor"
+                    console.log(response);
+                }
+                return response.text();
+            })
+            .then(data => console.log(data))
+            .catch(e => console.log(e));
+    };
+
+    function getUserNames() {
+        fetch(apiUrl + "users")
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.log(response.status);
                 }
             })
-            .then(responseText => {
-                let users = JSON.parse(responseText).results;
-                console.log(responseText);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            .then(data => callback(data))
+            .catch(e => console.log(e.message));
     }
 });

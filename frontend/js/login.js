@@ -1,15 +1,14 @@
-import { url } from "./api.js";
+import { apiUrl } from "./api.js";
 
 document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('btnLogin').addEventListener('click', login);
-    var loginSuccess;
     function login() {
         let usuario = document.getElementById("usuario").value;
         let password = document.getElementById("password").value;
         var data = new FormData();
         data.append("userName", usuario);
-        fetch(url + "user/" + usuario, {
+        fetch(apiUrl + "user/" + usuario, {
             method: "GET"
         })
         .then(response => response.json())
@@ -25,7 +24,5 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(e => console.log(e));
     };
-
-    console.log(loginSuccess);
 
 });
