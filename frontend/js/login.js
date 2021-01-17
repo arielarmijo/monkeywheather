@@ -1,31 +1,55 @@
 import { api } from "./api.js";
+import { clearError } from "./utils.js";
+import { showError } from "./utils.js";
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.getElementById('btnLogin').addEventListener('click', async function () {
-        
-        let usuario = document.getElementById("usuario").value;
-        let password = document.getElementById("password").value;
-        let feedback = document.getElementById('feedback');
+    let feedbackDiv = document.getElementById('feedback');
+    let usuarioInput = document.getElementById("usuario");
+    let passwordInput = document.getElementById("password");
+    let loginButton = document.getElementById('loginBtn');
+
+    usuarioInput.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          passwordInput.focus();
+        }
+      });
+
+    passwordInput.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          loginButton.click();
+        }
+      });
+
+    usuarioInput.addEventListener('focus', function () { clearError(feedbackDiv) });
+    passwordInput.addEventListener('focus', function () { clearError(feedbackDiv) });
+
+    loginButton.addEventListener('click', login);
+
+    async function login() {
+       
+        let usuario = usuarioInput.value;
+        let password = passwordInput.value;
 
         if (!usuario || !password) {
-            feedback.classList.remove("d-none");
-            feedback.innerText = "Llena todos los campos.";
+            showError(feedbackDiv, "Llena todos los campos.");
             return;
         }
 
-        let response = await fetch(api.user + "user/" + usuario);
+        let response = await fetch(`${api.user}/user/${usuario}`);
         let userData = await response.json();
         console.log(userData);
 
         if (userData.userName === "NULL" || userData.password !== password) {
-            feedback.classList.remove("d-none");
-            feedback.innerText = "Usuario y/o contraseña inválido.";
+            showError(feedbackDiv, "Usuario y/o contraseña inválido.");
             return;
         }
 
         window.location.href = "./user.html?user=" + usuario;
 
-    });
+    }
 
 });
+

@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     response = await fetch("snippets/usercard.html");
     let userCard = await response.text();
-    userCard = userCard.replace("${{avatar}}", api.user + "user/" + userName + "/image");
+    userCard = userCard.replace("${{avatar}}", `${api.user}/user/${userName}/image`);
     userCard = userCard.replace("${{saludo}}", `Bienvenido ${userName}`);
     document.getElementById("userCard").innerHTML = userCard;
 
-    response = await fetch(api.user + "user/" + userName);
+    response = await fetch(`${api.user}/user/${userName}`);
     let userData = await response.json();
     console.log(userData);
 
@@ -95,7 +95,7 @@ async function getCityWeather(city) {
     let weatherCard = document.getElementById("weatherCard");
     weatherCard.innerHTML = `<img class="mt-5" src="img/ajax-loader.gif" width="50" height="50"/>`;
 
-    let urlWeather = new URL(api.weather + "weather");
+    let urlWeather = new URL(`${api.weather}/weather`);
     urlWeather.searchParams.set("q", city);
     urlWeather.searchParams.set("units", "metric");
     urlWeather.searchParams.set("appid", api.key);
@@ -130,7 +130,7 @@ async function getCityWeather(city) {
         .catch(err => console.log(err));
 
 
-        let urlForecast = new URL(api.weather + "forecast/");
+        let urlForecast = new URL(`${api.weather}/forecast`);
         //let city = document.getElementById('cityInput').value;
         urlForecast.searchParams.set("q", city);
         urlForecast.searchParams.set("units", "metric");
