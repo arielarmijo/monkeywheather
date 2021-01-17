@@ -2,10 +2,8 @@ package monkeycode.monkeyweather.userapi.domain;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -21,7 +19,7 @@ public class Location {
 	private String city;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "locations")
 	private Set<User> users;
 
 	public Location() {

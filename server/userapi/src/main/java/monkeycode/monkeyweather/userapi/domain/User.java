@@ -3,7 +3,6 @@ package monkeycode.monkeyweather.userapi.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,11 +31,7 @@ public class User {
 	@Column(name = "avatar")
 	private byte[] avatar;
 
-	@ManyToMany(fetch = FetchType.EAGER,
-				cascade = { CascadeType.DETACH,
-							CascadeType.PERSIST,
-							CascadeType.MERGE,
-							CascadeType.REFRESH })
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "rel_users_locations",
 			   joinColumns = @JoinColumn(name = "user_fk"),
 			   inverseJoinColumns = @JoinColumn(name = "location_fk"))

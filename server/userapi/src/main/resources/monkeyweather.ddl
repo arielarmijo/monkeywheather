@@ -36,4 +36,4 @@ insert into rel_users_locations values ('admin', 'Concepción');
 
 commit;
 
-select * from rel_users_locations;
+select * from locations;
