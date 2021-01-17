@@ -13,26 +13,26 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepo;
 	
 	@Override
 	public List<String> obtenerNombresUsuario() {
-		return repo.findAllUsersNames();
+		return userRepo.findAllUsersNames();
 	}
 
 	@Override
 	public User buscarUsuarioPorNombre(String username) {
-		return repo.findByUserName(username);
+		return userRepo.findByUserName(username);
 	}
 
 	@Override
 	public void guardarUsuario(User user) {
-		repo.save(user);
+		userRepo.save(user);
 	}
 
 	@Override
 	public void borrarUsuario(User user) {
-		repo.delete(user);
+		userRepo.delete(user);
 	}
 	
 }

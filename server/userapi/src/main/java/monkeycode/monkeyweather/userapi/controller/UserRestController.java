@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +26,6 @@ import monkeycode.monkeyweather.userapi.domain.User;
 import monkeycode.monkeyweather.userapi.exception.UserNotFoundException;
 import monkeycode.monkeyweather.userapi.service.UserService;
 
-//@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class UserRestController {

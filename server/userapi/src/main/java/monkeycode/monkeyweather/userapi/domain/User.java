@@ -1,6 +1,5 @@
 package monkeycode.monkeyweather.userapi.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +35,7 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER,
 				cascade = { CascadeType.DETACH,
 							CascadeType.PERSIST,
+							CascadeType.MERGE,
 							CascadeType.REFRESH })
 	@JoinTable(name = "rel_users_locations",
 			   joinColumns = @JoinColumn(name = "user_fk"),
