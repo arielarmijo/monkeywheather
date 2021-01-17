@@ -78,6 +78,32 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     });
 
+    // Borra ciudad de la lista de favoritos
+    document.getElementById("deleteCityBtn").addEventListener("click", async function () {
+
+        if (document.getElementById('city')) {
+            let city = document.getElementById('city').innerText;
+            console.log(city);
+            let response = fetch(`${api.user}/user/${userName}/${city}`, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                    if (data) {
+                        makeCityDropDownList(data);
+                    }
+
+                });
+        }
+
+    });
+
 });
 
 async function makeCityDropDownList(userData) {
@@ -183,64 +209,64 @@ async function getCityForecast(city) {
             if (responseForecast) {
 
                 // Dibuja los íconos del tiempo
-                const iconsArray = responseForecast.list.filter((record,index)=>index%8===0).map(record=>{
-                    return({
-                      icon:record.weather[0].icon,
-                      dt: moment.unix(record.dt).format("dddd, DD")
+                const iconsArray = responseForecast.list.filter((record, index) => index % 8 === 0).map(record => {
+                    return ({
+                        icon: record.weather[0].icon,
+                        dt: moment.unix(record.dt).format("dddd, DD")
                     })
-                  });
+                });
 
-                for (let i=0;i<5;i++){
-                    document.getElementById('fore'+i.toString()).src=`http://openweathermap.org/img/wn/${iconsArray[i].icon}@2x.png`
-                    document.getElementById('day'+i.toString()).innerHTML=iconsArray[i].dt
+                for (let i = 0; i < 5; i++) {
+                    document.getElementById('fore' + i.toString()).src = `http://openweathermap.org/img/wn/${iconsArray[i].icon}@2x.png`
+                    document.getElementById('day' + i.toString()).innerHTML = iconsArray[i].dt
                 }
 
                 //Grafica pronóstico
-                var trace = { 
-                    x: responseForecast.list.filter((record,index)=>{
-                      if (index%8===0 )
-                        return record
-                    }).map(record=>record.dt_txt.substring(0,10)),        
-                    y: responseForecast.list.filter((record,index)=>{
-                      if (index%8===0 )
-                        return record
-                    }).map(record=>record.main.temp),      
-                    text: responseForecast.list.filter((record,index)=>{
-                      if (index%8===0 )
-                        return record
-                    }).map(record=>record.main.temp),
+                var trace = {
+                    x: responseForecast.list.filter((record, index) => {
+                        if (index % 8 === 0)
+                            return record
+                    }).map(record => record.dt_txt.substring(0, 10)),
+                    y: responseForecast.list.filter((record, index) => {
+                        if (index % 8 === 0)
+                            return record
+                    }).map(record => record.main.temp),
+                    text: responseForecast.list.filter((record, index) => {
+                        if (index % 8 === 0)
+                            return record
+                    }).map(record => record.main.temp),
                     textposition: 'auto',
                     cliponaxis: false,
-                    type: 'line',   
+                    type: 'line',
                     marker: {
-                      color: '#5b9aa0'
-                    }, 
-                    name:'Temperatura'
-                  };
+                        color: '#5b9aa0'
+                    },
+                    name: 'Temperatura'
+                };
 
-                  console.log(trace);
-                
-                  var layout = {
+                console.log(trace);
+
+                var layout = {
                     width: 600,
                     height: 400,
                     // title: 'Forecast del tiempo para los próximos dias',
                     showlegend: true,
-                    margin: 
-                      {
+                    margin:
+                    {
                         l: 50,
                         r: 0,
                         b: 60,
                         t: 40,
                         p: 50
-                      },
+                    },
                     hovermode: false,
-                    }
-                
-                  var config={
+                }
+
+                var config = {
                     displayModeBar: false, // this is the line that hides the plotly bar.
-                  }
-                
-                  Plotly.newPlot('plotly', [trace], layout, config);
+                }
+
+                Plotly.newPlot('plotly', [trace], layout, config);
 
             }
         })

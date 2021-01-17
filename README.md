@@ -7,7 +7,7 @@ Como plataforma se utilizan dos máquinas virtuales de Oracle Cloud. Una destina
 
 ### Objetivos
 - Proporcionar datos metereológicos actuales y futuros de una determinada ciudad utilizando la API de [OpenWeather](https://openweathermap.org/current).
-- Graficar datos metereológicos usando la librería javascript [Plotly](https://plotly.com/javascript/).
+- Graficar datos metereológicos usando la librería [Plotly](https://plotly.com/javascript/).
 - Implementar API Rest con datos de los usuarios de la aplicación.
 
 ### Sitio web
