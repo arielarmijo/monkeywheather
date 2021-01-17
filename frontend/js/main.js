@@ -4,6 +4,7 @@ const date = moment()
 fahrenheitInCelsius = k => Math.floor(k-273.15);
 
 async function getWeather(city){
+  moment.locale('es')
   const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=sp&appid=${apiKey}`);
   const response = await api_call.json();
   const api_call_forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=sp&appid=${apiKey}`)
