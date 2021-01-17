@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,22 +36,26 @@ public class UserRestController {
 	private UserService service;
 	
 	@GetMapping("/users")
+	@CrossOrigin
 	public List<String> mostrarUsuarios() {
 		return service.obtenerNombresUsuario();
 	}
 	
 	@GetMapping("/user/{username}")
+	@CrossOrigin
 	public User obtenerUsuario(@PathVariable String username) {
 		User user = service.buscarUsuarioPorNombre(username);
-		System.out.println(user);
 		if (user == null) {
-			throw new UserNotFoundException(username);
+			user = new User();
+			user.setUserName("NULL");
 		}
+		System.out.println(user);
 		return user;
 	}
 	
 	
 	@GetMapping("/user/{username}/image")
+	@CrossOrigin
 	public void obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
@@ -78,6 +82,7 @@ public class UserRestController {
 	
 	
 	@PostMapping("/user")
+	@CrossOrigin
 	public String agregarUsuario(@RequestParam String userName,
 			 					@RequestParam String password,
 			 					@RequestParam(required = false) String location,
@@ -101,10 +106,14 @@ public class UserRestController {
 		return "Usuario guardado con éxito";
 	}
 	
-	@PutMapping("/user/{username")
-	public String actualizarUsuario(@RequestBody User nvoUser) {
-		service.guardarUsuario(nvoUser);
-		return "Usuario actualizado con éxito.";
+	
+	@PutMapping("/user/{username}/{city}")
+	@CrossOrigin
+	public User agregarCiudad(@PathVariable String username, @PathVariable String city) {
+		User usuario = service.buscarUsuarioPorNombre(username);
+		usuario.addLocation(city);
+		service.guardarUsuario(usuario);
+		return usuario;
 	}
 	
 	@DeleteMapping("/user/{username}")

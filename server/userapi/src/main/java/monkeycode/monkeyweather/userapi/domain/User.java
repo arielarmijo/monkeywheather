@@ -35,7 +35,6 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.EAGER,
 				cascade = { CascadeType.DETACH,
-							CascadeType.MERGE,
 							CascadeType.PERSIST,
 							CascadeType.REFRESH })
 	@JoinTable(name = "rel_users_locations",
@@ -89,7 +88,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", password=" + password + ", avatar=" + Arrays.toString(avatar) + "]";
+		return "User [userName=" + userName + ", password=" + password + ", avatar=" + avatar.length + "]";
 	}
 
 }
