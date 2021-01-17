@@ -1,10 +1,10 @@
-let debug = true;
+let deploy = true;
 let url;
 
-if (debug) {
-    url = 'http://localhost:8080/monkeyweather';
-} else {
+if (deploy) {
     url = 'http://monkeycode.tk/monkeyweather-userapi';
+} else {
+    url = 'http://localhost:8080/monkeyweather';
 }
 
 export const api = {};
