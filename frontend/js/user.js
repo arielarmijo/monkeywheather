@@ -218,16 +218,17 @@ async function getCityForecast(city) {
                   console.log(trace);
                 
                   var layout = {
-                    width: 480,
-                    height: 250,
+                    width: 600,
+                    height: 400,
                     // title: 'Forecast del tiempo para los próximos dias',
                     showlegend: true,
                     margin: 
                       {
                         l: 50,
-                        r: 50,
+                        r: 0,
                         b: 60,
                         t: 40,
+                        p: 50
                       },
                     hovermode: false,
                     }
