@@ -6,7 +6,6 @@ fahrenheitInCelsius = k => Math.floor(k-273.15);
 async function getWeather(city){
   const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
   const response = await api_call.json();
-  debugger
   const api_call_forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
   const responseForecast = await api_call_forecast.json();
 
@@ -17,6 +16,7 @@ async function getWeather(city){
   document.getElementById('description').innerHTML=response.weather[0].description;
   document.getElementById('temp_max').innerHTML=response.main.temp_max;
   document.getElementById('temp_min').innerHTML=response.main.temp_min;
+  document.getElementById('city').innerHTML=response.name;
   console.log(response);
   console.log(responseForecast);
   var trace = { 
@@ -28,10 +28,40 @@ async function getWeather(city){
       if (index%8===0 )
         return record
     }).map(record=>fahrenheitInCelsius(record.main.temp)),      
-    type: 'bar'    
+    text: responseForecast.list.filter((record,index)=>{
+      if (index%8===0 )
+        return record
+    }).map(record=>fahrenheitInCelsius(record.main.temp)),
+    textposition: 'auto',
+    cliponaxis: false,
+    type: 'bar',   
+    marker: {
+      color: '#5b9aa0'
+    }, 
   };
+
+  var config={
+    displayModeBar: false, // this is the line that hides the plotly bar.
+  }
+
   console.log(trace)
-  Plotly.newPlot('myDiv', [trace]);
+  Plotly.newPlot(
+    'myDiv', 
+    [trace],
+    {
+    title: 'Forecast del tiempo para los próximos dias',
+    showlegend: true,
+    margin: 
+      {
+        l: 50,
+        r: 50,
+        b: 60,
+        t: 40,
+      },
+    hovermode: false,
+    },
+    config
+  );
 
 
 
