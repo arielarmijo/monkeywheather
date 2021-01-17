@@ -1,0 +1,12 @@
+.row {
+    text-align: start;
+    padding: .5rem;
+}
+
+label {
+    padding: .5em;
+}
+
+.form-control {
+    margin-bottom: .5em;
+}
