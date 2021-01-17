@@ -1,9 +1,7 @@
 package monkeycode.monkeyweather.userapi.controller;
 
-import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -57,22 +55,10 @@ public class UserRestController {
 		byte[] avatar = user.getAvatar();
 		response.setContentType("image/jpeg, image/jpg, image/png");
 		try (OutputStream out = response.getOutputStream()) {
-			if (avatar == null) {
-				Resource resource = new ClassPathResource("resources/img/unknown.jpg");
-				int bufferSize = 1024*10; // 10 KB
-				try (InputStream in = new BufferedInputStream(new FileInputStream(resource.getFile()))) {
-						byte[] buffer = new byte[bufferSize];
-						int bytesReaded;
-						while ((bytesReaded = in.read(buffer)) > 0) {
-							out.write(buffer, 0, bytesReaded);
-							out.flush();
-						}
-					}
-			} else {
-				out.write(avatar);
-			}
+			out.write(avatar);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -88,11 +74,22 @@ public class UserRestController {
 		if (!location.isEmpty()) {
 			user.addLocation(location);
 		}
+		byte[] bytes;
 		if (image != null) {
 			try {
-				byte[] bytes = image.getBytes();
+				bytes = image.getBytes();
 				user.setAvatar(bytes);
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			Resource resource = new ClassPathResource("resources/img/unknown.jpg");
+			try (FileInputStream fis = new FileInputStream(resource.getFile())) {
+				bytes = new byte[(int) resource.getFile().length()];
+				fis.read(bytes);
+				user.setAvatar(bytes);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

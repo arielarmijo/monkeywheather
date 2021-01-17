@@ -38,8 +38,8 @@
 				<td>POST</td>
 			</tr>
 			<tr>
-				<td>Actualizar usuario</td>
-				<td>/user/</td>
+				<td>Agregar ciudad a usuario</td>
+				<td>/user/{username}/{city}</td>
 				<td>PUT</td>
 			</tr>
 			<tr>
