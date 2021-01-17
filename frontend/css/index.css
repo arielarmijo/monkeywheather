@@ -10,7 +10,26 @@ nav {
 
 .weather-app .day{
     font-size: 10px;
+    min-height: 30px;
 }
+
+.weather-app .description{
+  font-size: 10px;
+}
+
+.weather-app .temp-max{
+  font-size: 10px;
+}
+
+.weather-app .temp-min{
+  font-size: 10px;
+}
+
+.weather-app .w-card{
+  padding:5px;
+  border: 1px solid black
+}
+
 
 .weather-app .img-wrapper{
   text-align: center;
