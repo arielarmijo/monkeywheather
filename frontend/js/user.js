@@ -128,6 +128,8 @@ async function getCityWeather(city) {
                 console.log("ciudad no encontrada");
                 weatherCard.innerHTML = "";
                 showError(errorDiv, "Ciudad no encontrada");
+                let forecastCard = document.getElementById("forecastCard");
+                forecastCard.innerHTML = "";
             }
         })
         .then(data => {
@@ -169,6 +171,7 @@ async function getCityForecast(city) {
 
     fetch(urlForecast)
         .then(response => {
+            console.log(response);
             if (response.ok) {
                 return response.json();
             } else {
