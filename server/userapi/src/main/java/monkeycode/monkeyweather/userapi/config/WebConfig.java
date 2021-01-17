@@ -24,9 +24,11 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.jsp().prefix("/WEB-INF/view/").suffix(".jsp");
 	}
 	
-//	@Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**");
-//    }
+	@Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+        		.allowedMethods("*")
+        		.allowedOrigins("*");
+    }
 
 }

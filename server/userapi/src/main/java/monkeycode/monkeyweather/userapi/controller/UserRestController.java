@@ -27,6 +27,7 @@ import monkeycode.monkeyweather.userapi.domain.User;
 import monkeycode.monkeyweather.userapi.exception.UserNotFoundException;
 import monkeycode.monkeyweather.userapi.service.UserService;
 
+//@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class UserRestController {
@@ -36,13 +37,11 @@ public class UserRestController {
 	private UserService service;
 	
 	@GetMapping("/users")
-	@CrossOrigin
 	public List<String> mostrarUsuarios() {
 		return service.obtenerNombresUsuario();
 	}
 	
 	@GetMapping("/user/{username}")
-	@CrossOrigin
 	public User obtenerUsuario(@PathVariable String username) {
 		User user = service.buscarUsuarioPorNombre(username);
 		if (user == null) {
@@ -55,7 +54,6 @@ public class UserRestController {
 	
 	
 	@GetMapping("/user/{username}/image")
-	@CrossOrigin
 	public void obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
@@ -82,7 +80,6 @@ public class UserRestController {
 	
 	
 	@PostMapping("/user")
-	@CrossOrigin
 	public String agregarUsuario(@RequestParam String userName,
 			 					@RequestParam String password,
 			 					@RequestParam(required = false) String location,
@@ -108,7 +105,6 @@ public class UserRestController {
 	
 	
 	@PutMapping("/user/{username}/{city}")
-	@CrossOrigin
 	public User agregarCiudad(@PathVariable String username, @PathVariable String city) {
 		User usuario = service.buscarUsuarioPorNombre(username);
 		usuario.addLocation(city);
