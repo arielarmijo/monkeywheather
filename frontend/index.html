@@ -2,47 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/ico" href="img/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/navbar.css" />
-    <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://unpkg.com/moment"></script>
-    <script src="js/navbar.js"></script>
-    <script type="module" src="js/index.js"></script>
-    <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://unpkg.com/moment"></script>
+  <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
+  <script src="js/navbar.js"></script>
 </head>
 
-<body>
+<body onload="getWeatherButton();">
+  <nav></nav>
+  <div class="weather-app container mt-5">
+    <div class="row">
+      <div class="col-auto">
+        <label for="cityInput" class="form-control-plaintext">Ciudad</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control" id="cityInput" placeholder="Ciudad">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary mb-3" type="button" onclick="getWeatherButton()">Obtener tiempo</button>
+      </div>
+    </div>
 
-    <nav></nav>
-    
-    <main>
+    <div class="row">
+      <div class="col-6">
+        <div class="card text-center">
+          <div id="time" class="card-header">
+          </div>
+          <div class="card-body">
+            <h5 id="city" class="card-title">Special title treatment</h5>
+            <image id="weatherImage" src='' />
+            <h5 id="description" class="card-title"></h5>
+            <p id="temp_max" class="card-text"></p>
+            <p id="temp_min" class="card-text"></p>
 
-        <h1 class="text-center">Monkey Weather</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
 
-        <div class="container mt-5">
 
-            <div class="row g-3">
-                <div class="col-auto">
-                    <label for="cityInput" class="form-control-plaintext">Ciudad</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" class="form-control" id="cityInput" placeholder="Ciudad" value="Santiago">
-                </div>
-                <div class="col-auto">
-                    <button id="getWeather" class="btn btn-primary mb-3">Obtener tiempo</button>
-                </div>
+        <div class="card text-center">
+          <div id="time" class="card-header">
+            Pronóstico para los próximos 5 dias
+          </div>
+          <div class="col-12" id="myDiv"></div>
+          <div class="row">
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore0" src="" />
+              </div>
+              <div class="day" id="day0"></div>
             </div>
-
-            <div id="weatherInfo"></div>
-
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore1" src="" />
+              </div>
+              <div class="day" id="day1"></div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore2" src="" />
+              </div>
+              <div class="day" id="day2"></div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore3" src="" />
+                <div class="day" id="day3"></div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore4" src="" />
+              </div>
+              <div class="day" id="day4"></div>
+            </div>
+          </div>
         </div>
 
-    </main>
 
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+  <!-- <script>    
+var trace = {        x: [1, 2, 3, 4, 5, 6, 7, 8],        y: [1, 4, 9, 16, 25, 36, 49, 64],        mode: 'line'    };
+var data = [ trace ];   Plotly.newPlot('myDiv', data);
+</script> -->
+
+  <script type="text/javascript" src="./js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
 </body>
 
 </html>
