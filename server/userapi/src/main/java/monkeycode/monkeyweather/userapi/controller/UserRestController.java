@@ -117,4 +117,12 @@ public class UserRestController {
 		return "Usuario " +  username + " eliminado.";
 	}
 	
+	@DeleteMapping("/user/{username}/{city}")
+	public User borrarCiudadUsuario(@PathVariable String username, @PathVariable String city) {
+		User usuario = service.buscarUsuarioPorNombre(username);
+		usuario.removeLocation(city);
+		service.guardarUsuario(usuario);
+		return usuario;
+	}
+	
 }

@@ -47,6 +47,19 @@ public class User {
 		locations.add(new Location(city));
 	}
 	
+	public void removeLocation(String city) {
+		if (locations == null) {
+			locations = new HashSet<Location>();
+		}
+		Location ciudad = null;
+		for (Location loc : locations) {
+			if (loc.getCity().equals(city))
+				ciudad = loc;
+		}
+		System.out.println(ciudad.getCity());
+		locations.remove(ciudad);
+	}
+	
 
 	public String getUserName() {
 		return userName;
