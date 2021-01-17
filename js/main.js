@@ -9,8 +9,9 @@ async function getWeather(city){
   const api_call_forecast = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
   const responseForecast = await api_call_forecast.json();
   const iconsArray = plotForecastIcons(responseForecast)
+
   renderForecast(iconsArray)
-  document.getElementById('time').innerHTML= moment.unix(response.dt).format('DD-MM-YYYY');
+  document.getElementById('time').innerHTML= moment.unix(response.dt).format("dddd, MMMM Do YYYY, h:mm:ss a")
   document.getElementById('weatherImage').src=`http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
   document.getElementById('description').innerHTML=response.weather[0].description;
   document.getElementById('temp_max').innerHTML=response.main.temp_max;
@@ -35,16 +36,17 @@ async function getWeather(city){
     }).map(record=>fahrenheitInCelsius(record.main.temp)),
     textposition: 'auto',
     cliponaxis: false,
-    type: 'bar',   
+    type: 'line',   
     marker: {
       color: '#5b9aa0'
     }, 
+    name:'Temperatura'
   };
 
   var layout = {
-    width: 380,
+    width: 480,
     height: 250,
-    title: 'Forecast del tiempo para los próximos dias',
+    // title: 'Forecast del tiempo para los próximos dias',
     showlegend: true,
     margin: 
       {
@@ -76,14 +78,20 @@ function getWeatherButton(){
 }
 
 function plotForecastIcons(forecastObj){
-  iconsArray = forecastObj.list.filter((record,index)=>index%8===0).map(record=>record.weather[0].icon)
+  iconsArray = forecastObj.list.filter((record,index)=>index%8===0).map(record=>{
+    return({
+      icon:record.weather[0].icon,
+      dt: moment.unix(record.dt).format("dddd, DD")
+    })
+    
+  })
   return iconsArray
 }
 
 function renderForecast(forecastArray){
   for (i=0;i<5;i++){
-    document.getElementById('fore'+i.toString()).src=`http://openweathermap.org/img/wn/${forecastArray[i]}@2x.png`
-    debugger
+    document.getElementById('fore'+i.toString()).src=`http://openweathermap.org/img/wn/${forecastArray[i].icon}@2x.png`
+    document.getElementById('day'+i.toString()).innerHTML=forecastArray[i].dt
   }
  
 

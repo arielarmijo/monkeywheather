@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -13,7 +14,7 @@
 </head>
 
 <body onload="getWeatherButton();">
-  <div class="container mt-5">
+  <div class="weather-app container mt-5">
     <div class="row">
 
       <div class="col-auto">
@@ -38,21 +39,54 @@
             <h5 id="description" class="card-title"></h5>
             <p id="temp_max" class="card-text"></p>
             <p id="temp_min" class="card-text"></p>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
           </div>
         </div>
       </div>
       <div class="col-6">
-        <div class="col-12" id="myDiv"></div>
-        <div class="row">
-          <div class="col-2"><image id="fore0" src=""/> </div>
-          <div class="col-2"><image id="fore1" src=""/></div>
-          <div class="col-2"><image id="fore2" src=""/></div>
-          <div class="col-2"><image id="fore3" src=""/></div>
-          <div class="col-2"><image id="fore4" src=""/></div>
+
+
+        <div class="card text-center">
+          <div id="time" class="card-header">
+            Pronóstico para los próximos 5 dias
+          </div>
+          <div class="col-12" id="myDiv"></div>
+          <div class="row">
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore0" src="" />
+              </div>
+              <div class="day" id="day0"></div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore1" src="" />
+              </div>
+              <div class="day" id="day1"></div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore2" src="" />
+              </div>
+              <div class="day" id="day2"></div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore3" src="" />
+                <div class="day" id="day3"></div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore4" src="" />
+              </div>
+              <div class="day" id="day4"></div>
+            </div>
+          </div>
         </div>
-        
+
+
+
       </div>
 
     </div>
