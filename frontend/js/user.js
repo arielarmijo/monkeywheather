@@ -5,11 +5,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     var url = new URL(window.location);
     var userName = url.searchParams.get("user");
 
+    // Agrega navbar
     let response = await fetch("snippets/navbar2.html");
     let navbar = await response.text();
     navbar = navbar.replace(/\$\{\{userName\}\}/g, userName);
     document.querySelector("nav").innerHTML = navbar;
 
+    // Agrega datos de usuario
     response = await fetch("snippets/usercard.html");
     let userCard = await response.text();
     userCard = userCard.replace("${{avatar}}", `${api.user}/user/${userName}/image`);
@@ -25,25 +27,34 @@ document.addEventListener('DOMContentLoaded', async function () {
         getCityWeather(document.querySelector("select").value);
     }
 
+
+    // Agrega el formulario para buscar tiempo de alguna ciudad
     response = await fetch("snippets/citysearch.html");
     let citySearch = await response.text();
     document.getElementById("citySearch").innerHTML = citySearch;
 
-    document.getElementById("getWeatherBtn").addEventListener("click", async function () {
+    let getWeatherBtn = document.getElementById("getWeatherBtn");
+    let cityInput =  document.getElementById("cityInput");
+
+    cityInput.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          getWeatherBtn.click();
+        }
+      });
+
+      getWeatherBtn.addEventListener("click", async function () {
         let city = document.getElementById('cityInput').value;
         getCityWeather(city);
-
-       
-
-
     });
 
+    // Guarda ciudad a favoritos
     document.getElementById("saveCityBtn").addEventListener("click", async function () {
 
         if (document.getElementById('city')) {
             let city = document.getElementById('city').innerText;
             console.log(city);
-            let response = fetch(`${api.user}user/${userName}/${city}`, {
+            let response = fetch(`${api.user}/user/${userName}/${city}`, {
                 method: "PUT"
             })
                 .then(response => {
