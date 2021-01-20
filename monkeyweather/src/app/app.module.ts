@@ -8,11 +8,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { CitysearchComponent } from './citysearch/citysearch.component';
 import { WeatherComponent } from './weather/weather.component';
-import { ForecastComponent } from './forecast/forecast.component';
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent, MainComponent, CitysearchComponent, WeatherComponent, ForecastComponent
+    AppComponent, NavbarComponent, MainComponent, CitysearchComponent, WeatherComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, CommonModule

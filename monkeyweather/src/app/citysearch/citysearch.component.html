@@ -1,10 +1,12 @@
-<div class="row my-3">
+<div class="row mb-3 justify-content-center">
     <div class="col-auto">
-        <input id="cityInput" type="search" class="form-control"  placeholder="Buscar ciudad">
+        <input type="search" class="form-control"  placeholder="Buscar ciudad" (keyup)="onInputKeyUp($event)">
     </div>
     <div class="col-auto p-0">
-        <button id="getWeatherBtn" class="btn btn-primary" title="Buscar ciudad"><i class="fas fa-search"></i></button>
-        <button id="saveCityBtn" class="btn btn-success ms-2" title="Agregar a favoritos"><i class="fas fa-bookmark"></i></button>
-        <button id="deleteCityBtn" class="btn btn-danger ms-2" title="Agregar a favoritos"><i class="fas fa-eraser"></i></button>
+        <button (click)="searchCity()" class="btn btn-primary" title="Buscar ciudad"><i class="fas fa-search"></i></button>
+        <ng-template [ngIf]="showButtons">
+            <button class="btn btn-success ms-2" title="Agregar a favoritos"><i class="fas fa-bookmark"></i></button>
+            <button class="btn btn-danger ms-2" title="Agregar a favoritos"><i class="fas fa-eraser"></i></button>
+        </ng-template>
     </div>
 </div>
