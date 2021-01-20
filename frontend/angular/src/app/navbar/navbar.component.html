@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand"routerLink="/">
+        <a class="navbar-brand"routerLink="/home">
             <img src="assets/logo.png" alt="logo.png" width="50" height="50">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monkeyWeatherNavbar"
@@ -10,10 +10,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="monkeyWeatherNavbar">
             <ul class="navbar-nav flex-row">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/login"><i class="fas fa-sign-in-alt"></i>{{ firstLink }}</a>
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active"><i class="fas fa-home"></i>Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/register"><i class="far fa-user-circle"></i>{{ secondLink }}</a>
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active"><i class="fas fa-sign-in-alt"></i>{{ firstLink }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/register" routerLinkActive="active"><i class="far fa-user-circle"></i>{{ secondLink }}</a>
                 </li>
             </ul>
         </div>

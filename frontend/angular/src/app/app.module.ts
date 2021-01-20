@@ -24,7 +24,8 @@ import { RegisterComponent } from './register/register.component';
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: '', component: MainComponent}
+      {path: 'home', component: MainComponent},
+      {path: '', redirectTo: "/home", pathMatch: "full"}
     ]), 
   ],
   providers: [],
