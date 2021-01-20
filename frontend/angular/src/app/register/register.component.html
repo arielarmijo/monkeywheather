@@ -1,0 +1,29 @@
+<div class="card col-md-10 col-lg-7 mx-auto">
+    <div class="card-body text-center">
+        <i class="far fa-user-circle"></i>
+        <h1>Registro</h1>
+        <div class="row">
+            <label for="userName">Usuario:</label>
+            <input  class="form-control" id="userName" type="text" name="userName"/>
+            <div id="userNameError" class="alert alert-danger d-none"></div>
+        </div>
+        <div class="row">
+            <label for="pwd1">Contraseña:</label>
+            <input class="form-control" id="pwd1" type="password" name="pwd1" placeholder="Ingrese contraseña"/>
+            <input class="form-control" id="pwd2" type="password" name="pwd2" placeholder="Reingrese contraseña"/>
+            <div id="passwordError" class="alert alert-danger d-none"></div>
+        </div>
+        <div class="row">
+            <label for="location">Ubicación:</label>
+            <input class="form-control" id="location" type="text" name="location"/>
+        </div>
+        <div class="row">
+            <label>Subir imágen</label>
+            <input id="image" class="form-control" type="file" name="image" accept="image/jpg, image/jpeg, image/png" />
+        </div>
+        <div class="row">
+            <label id="preview" class="text-center"></label>
+        </div>
+        <button id="registrarButton" class="btn btn-primary">Registrar</button>
+    </div>
+</div>

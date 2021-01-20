@@ -1,0 +1,12 @@
+.row {
+    margin-bottom: 1em;
+    justify-content: center;
+}
+
+.col-auto:first-child {
+    padding-right: 0;
+}
+
+button {
+    margin-right: .3em;
+}

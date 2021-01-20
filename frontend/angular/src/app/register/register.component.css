@@ -1,0 +1,26 @@
+i {
+	color: rgb(0 0 0 / 55%);
+}
+
+.card {
+    text-align: center;
+    box-shadow: 0 .5em 1rem rgba(0,0,0,0.5);
+}
+
+.card-body > i {
+	font-size: 4em;
+	
+}
+
+.row {
+    text-align: start;
+    padding: .5rem;
+}
+
+label {
+    padding: .5em;
+}
+
+.form-control {
+    margin-bottom: .5em;
+}

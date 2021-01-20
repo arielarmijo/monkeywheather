@@ -27,10 +27,15 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
+            "styles": [ 
+              "src/assets/bootstrap.min.css",
+              "src/styles.css",
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/bootstrap.bundle.min.js",
+              "src/assets/plotly-latest.min.js",
+              "src/assets/font-awesome.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -122,6 +127,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "monkeyweather"
 }

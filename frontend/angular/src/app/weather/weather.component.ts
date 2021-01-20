@@ -3,9 +3,8 @@ import { Subscription } from 'rxjs';
 import { CityService } from '../city.service';
 import { OpenweatherService, Location } from '../openweather.service';
 import * as Moment from 'moment';
-import Plotly from 'plotly.js-dist';
 
-var Plotly = require('plotly.js-dist');
+declare var Plotly: any;
 
 @Component({
   selector: 'mc-weather',
@@ -40,11 +39,12 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   getWeatherData(city: string): void {
-    this.weatherService.getCityLocation(city).subscribe(data => {
+    let locationData$ = this.weatherService.getCityLocation(city).subscribe(data => {
       console.log(data);
       let loc: Location = data[0];
       this.city = loc.name;
-      this.weatherService.getCityWeatherData(loc).subscribe(data => {
+      locationData$.unsubscribe();
+      let weatherData$ = this.weatherService.getCityWeatherData(loc).subscribe(data => {
         console.log(data);
         // Datos del tiempo
         this.date = Moment.unix(data.current.dt).format("LLL");
@@ -58,102 +58,79 @@ export class WeatherComponent implements OnInit, OnDestroy {
         // Pronóstico
         let temperatures = data.daily.map(item => item.temp);
         let dates = data.daily.filter((item, i) => i < 5).map(item => Moment.unix(item.dt).format("dddd"));
-        console.log(temperatures);
-        console.log(dates);
+        weatherData$.unsubscribe();
+        //console.log(temperatures);
+        //console.log(dates);
 
         var tempMax = {
           x: dates,
           y: temperatures.map(data => data.max),
           text: dates,
-          textposition: 'auto',
+          hovertemplate: '%{y:.1f} °C',
           cliponaxis: false,
           type: 'line',
-          // marker: {
-          //   color: '#5b9aa0'
-          // },
-          name: 'Temperatura máxima'
+          name: 'Máxima'
         };
-        // console.log(tempMax);
 
         var tempMin = {
           x: dates,
           y: temperatures.map(data => data.min),
           text: dates,
-          textposition: 'auto',
+          hovertemplate: '%{y:.1f} °C',
           cliponaxis: false,
           type: 'line',
-          // marker: {
-          //   color: '#622569'
-          // },
-          name: 'Temperatura mínima'
-        };
-        //console.log(tempMin);
-
-        var tempMorn = {
-          x: dates,
-          y: temperatures.map(data => data.morn),
-          text: dates,
-          textposition: 'auto',
-          cliponaxis: false,
-          type: 'line',
-          // marker: {
-          //   color: '#5b9aa0'
-          // },
-          name: 'Temperatura mañana'
+          name: 'Mínima'
         };
 
         var tempDay = {
           x: dates,
           y: temperatures.map(data => data.day),
           text: dates,
-          textposition: 'auto',
+          hovertemplate: '%{y:.1f} °C',
           cliponaxis: false,
           type: 'line',
-          // marker: {
-          //   color: '#5b9aa0'
-          // },
-          name: 'Temperatura día'
-        };
-
-        var tempEve = {
-          x: dates,
-          y: temperatures.map(data => data.eve),
-          text: dates,
-          textposition: 'auto',
-          cliponaxis: false,
-          type: 'line',
-          // marker: {
-          //   color: '#5b9aa0'
-          // },
-          name: 'Temperatura tarde'
-        };
-
-        var tempNight = {
-          x: dates,
-          y: temperatures.map(data => data.night),
-          text: dates,
-          textposition: 'auto',
-          cliponaxis: false,
-          type: 'line',
-          // marker: {
-          //   color: '#5b9aa0'
-          // },
-          name: 'Temperatura noche'
+          name: 'Media'
         };
 
         var layout = {
-          hovermode: false,
-          autoexpand: false,
+          title: {
+            text: "Temperaturas próximos 5 días",
+            font: {
+              size: 24
+            }
+          },
+          xaxis: {
+            title: {text: "Día"},
+            showline: true,
+            ticks: "outside",
+          },
+          yaxis: {
+            title: {text: "Temperatura"},
+            showline: true,
+            ticks: "outside",
+            ticksuffix: "°C ",
+          },
           showlegend: true,
-          legend: { orientation: "h"}
+          legend: {
+            itemclick: "toggleothers",
+            itemdoubleclick: "toggle",
+            orientation: "v",
+            x: 1,
+            y: 0.5,
+          },
+          hovermode: true,
+          autoexpand: false,
+          autosize: true,
         }
 
         var config = {
           displayModeBar: false,
-          responsive: true
+          responsive: true,
+          scrollZoom: true,
+          doubleClickDelay: 500
         }
 
-        Plotly.newPlot('forecastChart', [tempMax, tempMin, tempMorn, tempDay, tempEve, tempNight], layout, config);
+        Plotly.newPlot('forecastChart', [tempMax, tempDay, tempMin], layout, config);
 
       });
     });

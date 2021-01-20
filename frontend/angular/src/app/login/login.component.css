@@ -1,0 +1,31 @@
+.row {
+    justify-content: center;
+}
+
+.card {
+    text-align: center;
+    box-shadow: 0 .5em 1rem rgba(0,0,0,0.5);
+}
+
+i {
+    color: rgb(0 0 0 / 55%);
+    font-size: large;
+}
+
+.card-header > i {
+	font-size: 4em;
+	
+}
+
+div:not(:first-child) {
+    margin: .75em 0;
+}
+
+input {
+    font-size: large;
+    height: 3em;
+}
+
+button {
+    font-size: large;
+}

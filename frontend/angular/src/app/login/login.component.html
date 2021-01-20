@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-10 col-lg-8 col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h1>Login</h1>
+                </div>
+                <ng-template [ngIf]="error">
+                    <div class="alert alert-danger">{{ message }}</div>
+                </ng-template>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                    <input type="text" class="form-control" (keyup)="onUserNameKeyUp($event)" placeholder="Nombre de usuario" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    <input type="password" class="form-control" (keyup)="onPasswordKeyUp($event)" placeholder="Contraseña" />
+                </div>
+                <div>
+                    <button class="btn btn-primary" (click)="logIn()">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
