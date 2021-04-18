@@ -5,7 +5,7 @@ pipeline {
 			steps {
 				sh 'ls -l'
 				sh 'mvn --version'
-				sh 'mvn --batch-mode --file monkeyweather/pom.xml clean package'
+				sh 'mvn --batch-mode clean package'
 			}
 		}
 		stage('deploy') {
