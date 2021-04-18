@@ -3,6 +3,7 @@ package tk.monkeycode.monkeyweather.userapi.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -11,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,21 +59,21 @@ public class UserRestController {
 	
 	
 	@GetMapping("/user/{username}/image")
-	public void obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
+	public ResponseEntity<?> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
-		response.setContentType("image/jpeg, image/jpg, image/png");
-		try (OutputStream out = response.getOutputStream()) {
-			if (avatar == null) {
-				Resource unknown = new ClassPathResource("static/img/unknown.jpg");
-				avatar = Files.readAllBytes(unknown.getFile().toPath());
-				logger.info(unknown.toString());
-			}
-			out.write(avatar);		
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+		
+		Resource recurso = null;
+		if (avatar == null) {
+			recurso = new ClassPathResource("static/img/unknown.jpg");
+		} else {
+			recurso = new ByteArrayResource(avatar);
 		}
+		
+		HttpHeaders cabecera = new HttpHeaders();
+		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+		return new ResponseEntity<>(recurso, cabecera, HttpStatus.OK);
+		
 	}
 	
 	
