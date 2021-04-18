@@ -9,11 +9,15 @@ pipeline {
 				sh 'ls -l'
 			}
 		}
-		stage('deploy') {
+		stage('clean') {
 			when { expression {  fileExists (WEB_FOLDER) } }
 			steps {
-				sh 'rm -rf $WEB_FOLDER'
-				sh 'cp -r monkeyweather/* $WEB_FOLDER'
+				sh 'rm -rfv $WEB_FOLDER'
+			}
+		}
+		stage('deploy') {
+			steps {
+				sh 'cp -vr monkeyweather/* $WEB_FOLDER'
 			}
 		}
 	}
