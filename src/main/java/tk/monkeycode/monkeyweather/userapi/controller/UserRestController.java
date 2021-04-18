@@ -67,7 +67,7 @@ public class UserRestController {
 		byte[] avatar = user.getAvatar();
 		Resource recurso;
 		if (avatar == null) {
-			recurso = resourceLoader.getResource("classpath:static/img/unknown.jpg");
+			recurso = resourceLoader.getResource("classpath:/static/img/unknown.jpg");
 			logger.info("Recurso: {}", recurso.getURI().toString());
 		} else {
 			recurso  = new ByteArrayResource(avatar);
