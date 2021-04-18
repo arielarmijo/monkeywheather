@@ -2,9 +2,6 @@ package tk.monkeycode.monkeyweather.userapi.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.nio.file.Files;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,21 +55,19 @@ public class UserRestController {
 	}
 	
 	
-	@GetMapping("/user/{username}/image")
-	public ResponseEntity<?> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
+	@GetMapping(value = "/user/{username}/image", produces = MediaType.IMAGE_PNG_VALUE)
+	public ResponseEntity<Resource> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
-		
-		Resource recurso = null;
+		Resource recurso;
 		if (avatar == null) {
 			recurso = new ClassPathResource("static/img/unknown.jpg");
 		} else {
-			recurso = new ByteArrayResource(avatar);
+			recurso  = new ByteArrayResource(avatar);
 		}
 		
-		HttpHeaders cabecera = new HttpHeaders();
-		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
-		return new ResponseEntity<>(recurso, cabecera, HttpStatus.OK);
+		logger.info("Recurso: {}", recurso.toString());
+		return new ResponseEntity<>(recurso, HttpStatus.OK);
 		
 	}
 	
