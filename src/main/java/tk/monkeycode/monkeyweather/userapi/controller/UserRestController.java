@@ -61,7 +61,7 @@ public class UserRestController {
 	
 	
 	@GetMapping(value = "/user/{username}/image", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<byte[]> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletRequest request) {
+	public ResponseEntity<byte[]> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletRequest request) throws IOException {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
 		if (avatar == null) {
