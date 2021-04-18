@@ -3,10 +3,13 @@ package tk.monkeycode.monkeyweather.userapi.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -28,6 +31,7 @@ import tk.monkeycode.monkeyweather.userapi.service.UserService;
 @RequestMapping("/user-api")
 public class UserRestController {
 	
+	private final Logger logger = LoggerFactory.getLogger(UserRestController.class);	
 	
 	@Autowired
 	private UserService service;
@@ -55,9 +59,14 @@ public class UserRestController {
 		byte[] avatar = user.getAvatar();
 		response.setContentType("image/jpeg, image/jpg, image/png");
 		try (OutputStream out = response.getOutputStream()) {
-			out.write(avatar);
+			if (avatar == null) {
+				Resource unknown = new ClassPathResource("static/img/unknown.jpg");
+				avatar = Files.readAllBytes(unknown.getFile().toPath());
+				logger.info(unknown.toString());
+			}
+			out.write(avatar);		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}
