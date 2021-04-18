@@ -10,7 +10,7 @@ pipeline {
 		}
 		stage('deploy') {
 			steps {
-				sh 'cp server/userapi/target/*.war /var/lib/tomcat9/webapps/'
+				sh 'cp server/userapi/target/*.war /opt/tomcat/latest/webapps/'
 			}
 		}
 	}
