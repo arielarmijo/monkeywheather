@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -55,17 +56,25 @@ public class UserRestController {
 		return user;
 	}
 	
+	
+	
+	
+	
 	@GetMapping(value = "/user/{username}/image", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<byte[]> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) throws IOException {
+	public ResponseEntity<byte[]> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletRequest request) {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
-		logger.info("Avatar es null? {}", avatar == null);
 		if (avatar == null) {
-			InputStream inputStream = getClass().getResourceAsStream("/img/unknown.jpg");
+			ServletContext context = request.getServletContext();
+			InputStream inputStream = context.getResourceAsStream("/static/img/unknown.jpg");
 			avatar = IOUtils.toByteArray(inputStream);
 		} 
 		return new ResponseEntity<>(avatar, HttpStatus.OK);
 	}
+	
+	
+	
+	
 	
 	
 	@PostMapping("/user")
