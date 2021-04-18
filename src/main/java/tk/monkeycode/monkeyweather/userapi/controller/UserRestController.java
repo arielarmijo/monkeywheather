@@ -2,6 +2,8 @@ package tk.monkeycode.monkeyweather.userapi.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,19 +58,22 @@ public class UserRestController {
 		return user;
 	}
 	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	
 	@GetMapping(value = "/user/{username}/image", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<Resource> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) {
+	public ResponseEntity<Resource> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) throws IOException {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
 		Resource recurso;
 		if (avatar == null) {
-			recurso = new ClassPathResource("static/img/unknown.jpg");
+			recurso = resourceLoader.getResource("classpath:static/img/unknown.jpg");
+			logger.info("Recurso: {}", recurso.getURI().toString());
 		} else {
 			recurso  = new ByteArrayResource(avatar);
 		}
 		
-		logger.info("Recurso: {}", recurso.toString());
+		
 		return new ResponseEntity<>(recurso, HttpStatus.OK);
 		
 	}
