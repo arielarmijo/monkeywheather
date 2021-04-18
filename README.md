@@ -13,7 +13,7 @@ Como plataforma se utilizan dos máquinas virtuales de Oracle Cloud. Una destina
 - Implementar API Rest que ofrezca información de los usuarios registrados en la aplicación usando Spring Framework.
 
 ### Sitio web
-[Monkey Weather App](http://monkeycode.tk/monkeyweather/)
+[Monkey Weather App](http://152.67.40.135:8080/monkeyweather/)
 
 ### Servidor API Rest
-[Monkey Weather User API](http://monkeycode.tk/monkeyweather-userapi/)
+[Monkey Weather User API](http://152.67.40.135:8080/monkeyweather/user-api)
