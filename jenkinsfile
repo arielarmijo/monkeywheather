@@ -1,0 +1,17 @@
+pipeline {
+	agent any
+	stages {
+		stage('build') {
+			steps {
+				sh 'ls -l'
+				sh 'mvn --version'
+				sh 'mvn -f monkeyweather/pom.xml clean package'
+			}
+		}
+		stage('deploy') {
+			steps {
+				sh 'cp monkeyweather/target/*.war /opt/tomcat/latest/webapps/'
+			}
+		}
+	}
+}
