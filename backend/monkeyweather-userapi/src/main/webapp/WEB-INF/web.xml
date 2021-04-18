@@ -4,5 +4,5 @@
 		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 		 metadata-complete="false"
 		 version="4.0">
-  <display-name>MonkeyWeather user API</display-name>
+  <display-name>MonkeyWeather User API</display-name>
 </web-app>
