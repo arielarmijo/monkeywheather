@@ -17,7 +17,7 @@ pipeline {
 		}
 		stage('deploy') {
 			steps {
-				sh 'cp -rv monkeyweather/* $WEB_FOLDER'
+				sh 'cp -rv ./* $WEB_FOLDER'
 			}
 		}
 	}
