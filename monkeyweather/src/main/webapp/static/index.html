@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonkeyWeather</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- <script src="https://unpkg.com/moment"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+  <script src="https://kit.fontawesome.com/aaf6652f81.js"></script>
+  <script src="js/navbar.js"></script>
+</head>
+
+<body onload="getWeatherButton();">
+  <nav></nav>
+  <div class="weather-app container mt-5">
+    <div class="row">
+      <div class="col-auto">
+        <label for="cityInput" class="form-control-plaintext">Ciudad</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control" id="cityInput" placeholder="Ciudad">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary mb-3" type="button" onclick="getWeatherButton()">Obtener tiempo</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="card text-center">
+          <div id="time" class="card-header">
+          </div>
+          <div class="card-body">
+            <h5 id="city" class="card-title">Special title treatment</h5>
+            <image id="weatherImage" src='' />
+            <h5 id="description" class="card-title"></h5>
+            <p id="temp_max" class="card-text"></p>
+            <p id="temp_min" class="card-text"></p>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-6"> 
+
+
+        <div class="card text-center">
+          <div id="time" class="card-header">
+            Pronóstico para los próximos 5 dias
+          </div>
+          <div class="col-12" id="myDiv"></div>
+          <div class="row">
+            <div class="w-card col-2 offset-1">
+              <div class="day" id="day0"></div>
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore0" />
+              </div>
+              <div class="temp-min" id="tempMin0"></div>
+              <div class="temp-max" id="tempMax0"></div>
+              <div class="description" id="desc0"></div>
+            </div>
+            <div class="w-card col-2">
+              <div class="day" id="day1"></div>
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore1" />
+              </div>
+              <div class="temp-min" id="tempMin1"></div>
+              <div class="temp-max" id="tempMax1"></div>
+              <div class="description" id="desc1"></div>
+            </div>
+            <div class="w-card col-2">
+              <div class="day" id="day2"></div>
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore2" />
+              </div>
+              <div class="temp-min" id="tempMin2"></div>
+              <div class="temp-max" id="tempMax2"></div>
+              <div class="description" id="desc2"></div>
+            </div>
+            <div class="w-card col-2">
+              <div class="day" id="day3"></div>
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore3" />
+              </div>
+              <div class="temp-min" id="tempMin3"></div>
+              <div class="temp-max" id="tempMax3"></div>
+              <div class="description" id="desc3"></div>
+            </div>
+            <div class="w-card col-2">
+              <div class="day" id="day4"></div>
+              <div class="img-wrapper">
+                <img class="img-forecast" id="fore4" />
+              </div>
+              <div class="temp-min" id="tempMin4"></div>
+              <div class="temp-max" id="tempMax4"></div>
+              <div class="description" id="desc4"></div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+  <!-- <script>    
+var trace = {        x: [1, 2, 3, 4, 5, 6, 7, 8],        y: [1, 4, 9, 16, 25, 36, 49, 64],        mode: 'line'    };
+var data = [ trace ];   Plotly.newPlot('myDiv', data);
+</script> -->
+
+  <script type="text/javascript" src="./js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+</body>
+
+</html>
