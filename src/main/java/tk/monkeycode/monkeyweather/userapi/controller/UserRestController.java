@@ -2,20 +2,17 @@ package tk.monkeycode.monkeyweather.userapi.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -58,24 +55,16 @@ public class UserRestController {
 		return user;
 	}
 	
-	@Autowired
-	private ResourceLoader resourceLoader;
-	
 	@GetMapping(value = "/user/{username}/image", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<Resource> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) throws IOException {
+	public ResponseEntity<byte[]> obtenerImagenUsuario(@PathVariable(name = "username") String username, HttpServletResponse response) throws IOException {
 		User user = service.buscarUsuarioPorNombre(username);
 		byte[] avatar = user.getAvatar();
-		Resource recurso;
+		logger.info("Avatar es null? {}", avatar == null);
 		if (avatar == null) {
-			recurso = resourceLoader.getResource("classpath:/static/img/unknown.jpg");
-			logger.info("Recurso: {}", recurso.getURI().toString());
-		} else {
-			recurso  = new ByteArrayResource(avatar);
-		}
-		
-		
-		return new ResponseEntity<>(recurso, HttpStatus.OK);
-		
+			InputStream inputStream = getClass().getResourceAsStream("/static/img/unknown.jpg");
+			avatar = IOUtils.toByteArray(inputStream);
+		} 
+		return new ResponseEntity<>(avatar, HttpStatus.OK);
 	}
 	
 	
