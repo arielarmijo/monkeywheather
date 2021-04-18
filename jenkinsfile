@@ -1,0 +1,20 @@
+pipeline {
+	agent any
+	environment {
+		WEB_FOLDER = '/opt/tomcat/latest/webapps/monkeyweather/static'
+	}
+	stages {
+		stage('build') {
+			steps {
+				sh 'ls -l'
+			}
+		}
+		stage('deploy') {
+			when { expression {  fileExists (WEB_FOLDER) } }
+			steps {
+				sh 'rm -rf $WEB_FOLDER'
+				sh 'cp -r monkeyweather/* $WEB_FOLDER'
+			}
+		}
+	}
+}
