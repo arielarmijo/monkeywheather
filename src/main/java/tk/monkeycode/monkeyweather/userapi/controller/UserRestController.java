@@ -61,7 +61,7 @@ public class UserRestController {
 		byte[] avatar = user.getAvatar();
 		logger.info("Avatar es null? {}", avatar == null);
 		if (avatar == null) {
-			InputStream inputStream = getClass().getResourceAsStream("/static/img/unknown.jpg");
+			InputStream inputStream = getClass().getResourceAsStream("/img/unknown.jpg");
 			avatar = IOUtils.toByteArray(inputStream);
 		} 
 		return new ResponseEntity<>(avatar, HttpStatus.OK);
