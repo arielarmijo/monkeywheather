@@ -12,12 +12,12 @@ pipeline {
 		stage('clean') {
 			when { expression {  fileExists (WEB_FOLDER) } }
 			steps {
-				sh 'rm -rfv $WEB_FOLDER'
+				sh 'rm -rfv $WEB_FOLDER/*'
 			}
 		}
 		stage('deploy') {
 			steps {
-				sh 'cp -vr monkeyweather/* $WEB_FOLDER'
+				sh 'cp -prv monkeyweather/* $WEB_FOLDER'
 			}
 		}
 	}
