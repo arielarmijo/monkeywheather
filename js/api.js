@@ -2,9 +2,9 @@ let deploy = true;
 let url;
 
 if (deploy) {
-    url = 'http://monkeycode.tk/monkeyweather-userapi';
+    url = 'http://152.67.40.135:8080/monkeyweather/user-api';
 } else {
-    url = 'http://localhost:8080/monkeyweather';
+    url = 'http://localhost:8080/monkeyweather/user-api';
 }
 
 export const api = {};
